@@ -1,0 +1,45 @@
+<script setup>
+
+</script>
+
+<template>
+    <header>
+        <h1>Deutsch's Movies</h1>
+        <div class="links">
+            <router-link to="/filmes">Filmes</router-link>
+            <router-link to="/series">Séries</router-link>
+            <router-link to="/tv">TV</router-link>
+        </div>
+    </header>
+</template>
+
+<style>
+
+header {
+    height: 50px;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+h1 {
+    position: absolute;
+}
+
+.links {
+    display: flex;
+    gap: 15%;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+</style>
