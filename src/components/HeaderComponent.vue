@@ -13,7 +13,7 @@
     </header>
 </template>
 
-<style>
+<style scoped>
 
 header {
     height: 50px;
@@ -23,6 +23,8 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: sticky;
+    top: 0;
 }
 
 h1 {

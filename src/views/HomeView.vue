@@ -1,10 +1,15 @@
 <script setup>
 
 import HeaderComponent from '../components/HeaderComponent.vue';
-import { ref } from 'vue';
+import SliderPopulares from '../components/SliderPopulares.vue'
 
 </script>
 
 <template>
-    <header-component />
+        <header-component />
+        <slider-populares />
 </template>
+
+<style scoped>
+
+</style>

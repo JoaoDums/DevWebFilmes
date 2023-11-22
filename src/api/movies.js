@@ -4,10 +4,16 @@ const config = {headers: {accept: 'application/json', Authorization: `Bearer eyJ
 
 class moviesApi {
     async getAllMovies() {
-        const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc', config)
-        const data = await response.json()
-        return data.results
+        const { data } = await axios.get('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc', config)
+        return data
+    }
+    async getMovieTrailers(id) {
+        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?language=pt-BR`, config)
+        return data
+    }
+    async getMovieImages(id) {
+        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}/images?language=pt`, config)
+        return data
     }
 }
-
 export default new moviesApi
