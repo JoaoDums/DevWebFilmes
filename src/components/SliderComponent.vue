@@ -1,24 +1,14 @@
 <script setup>
 
-import moviesApi from '../api/movies'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
+import { useMovieStore } from '@/stores/movieData';
 
-const movies = ref([]);
-const movieImages = ref([]);
+const movieStore = new useMovieStore()
+
+const movies = movieStore.movies;
+const backdrops = movieStore.backdrops;
 const movieSlider = ref();
 const currentMovie = ref(0)
-
-async function getMoviesAndImages() {
-    const responseMovies = await moviesApi.getAllMovies()
-    movies.value = responseMovies.results
-    console.log(movies.value)
-    movieImages.value = []
-
-    for (let movie of movies.value) {
-        movieImages.value.push(movie.backdrop_path);
-    }
-    console.log(movieImages.value)
-};
 
 function changeSlide(index) {
 
@@ -37,17 +27,13 @@ function changeSlide(index) {
 };
 
 
-onMounted(() => {
-    getMoviesAndImages();
-})
-
 </script>
 
 <template>
     <div class="container">
         <div class="left navigation" @click="changeSlide(-1)">...</div>
         <div class="slideContainer">
-            <div class="slider" v-for="image, index of movieImages" :key="index" ref="movieSlider">
+            <div class="slider" v-for="image, index of backdrops" :key="index" ref="movieSlider">
                 <img :src="`https://image.tmdb.org/t/p/original/${image}`" alt="">
             </div>
         </div>
@@ -61,12 +47,14 @@ onMounted(() => {
     display: flex;
     width: 100%;
     color: white;
+    margin-top: -10px;
 }
 .slider {
     position: relative;
     display: flex;
     justify-content: center;
     margin-left: 10%;
+
 }
 
 .slideContainer {
@@ -77,6 +65,7 @@ onMounted(() => {
     height: 700px;
     color: white;
     scrollbar-width: none;
+    padding: 2%;
 }
 
 .navigation {
@@ -87,6 +76,12 @@ onMounted(() => {
     z-index: 9999;
     height: 10px;
     margin-top: 20%;
+}
+
+img {
+    border: 3px solid rgba(255, 255, 255, 0.856);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px black;
 }
 
 </style>
