@@ -1,18 +1,16 @@
 <script setup>
 
-import { ref } from 'vue';
+import { watch, ref } from 'vue';
 import { useMovieStore } from '@/stores/movieData';
 
 const movieStore = new useMovieStore()
-
-const movies = movieStore.movies;
 const backdrops = movieStore.backdrops;
 const movieSlider = ref();
 const currentMovie = ref(0)
 
 function changeSlide(index) {
 
-    if (currentMovie.value == 0 && index == -1 || currentMovie.value == movies.value.length - 1) {
+    if (currentMovie.value == 0 && index == -1 || currentMovie.value == backdrops.length - 1) {
         currentMovie.value = 0
     } else {
         currentMovie.value += index
@@ -22,10 +20,7 @@ function changeSlide(index) {
             block: 'nearest',
             inline: 'center'
         });
-    
-        console.log(currentMovie.value)
 };
-
 
 </script>
 
@@ -73,7 +68,7 @@ function changeSlide(index) {
     cursor: pointer;
     padding: 20px;
     border: 1px solid;
-    z-index: 9999;
+    z-index: 2;
     height: 10px;
     margin-top: 20%;
 }
@@ -81,7 +76,7 @@ function changeSlide(index) {
 img {
     border: 3px solid rgba(255, 255, 255, 0.856);
     border-radius: 5px;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 10px 10px 5px black;
 }
 
 </style>

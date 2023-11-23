@@ -26,6 +26,7 @@ header {
     position: sticky;
     top: 0;
     background-color: rgba(19, 19, 19, 0.247);
+    z-index: 3;
 }
 
 h1 {
