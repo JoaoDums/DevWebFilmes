@@ -3,19 +3,32 @@ import moviesApi from '../api/movies';
 
 export const useMovieStore = defineStore('movies', {
     state: () => ({
-        movies: [],
-        backdrops: [],
-        posters: [],
+        filmesPopulares: [],
+        filmesMaisVistos: [],
+        seriesPopulares: [],
+        seriesMelhorAvalidas: [],
+        filmesVariasPaginas: [],
     }),
     actions: {
-        async getMoviesData() {
-            const responseMovies = await moviesApi.getAllMovies();
-            this.movies = responseMovies.results;
+        async buscarFilmes() {
+            let response = await moviesApi.buscarFilmesPopulares(1);
+            this.filmesPopulares = response.results;
 
-            for (let movie of this.movies) {
-                this.backdrops.push(movie.backdrop_path);
-                this.posters.push(movie.poster_path);
-            };
+            console.log(this.filmesPopulares)
+            response =  await moviesApi.buscarFilmesMaisVistos();
+            this.filmesMaisVistos = response.results;
+
+            response = await moviesApi.buscarSeriesNoAr();
+            this.seriesNoAr = response.results
+            
+            response = await moviesApi.buscarSeriesMelhoresAvaliadas();
+            this.seriesMelhorAvalidas = response.results
+
+            this.filmesVariasPaginas = this.filmesPopulares;
+            response = await moviesApi.buscarFilmesPopulares(2);
+            for (let filme of response.results) {
+                this.filmesVariasPaginas.push(filme);
+            }
         }
     },
 });

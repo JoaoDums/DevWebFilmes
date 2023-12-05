@@ -4,11 +4,12 @@
 
 <template>
     <header>
-        <h1>Deutsch's Movies</h1>
+        <router-link to="/" class="title">
+            <h1>Deutsch's Movies</h1>
+        </router-link>
         <div class="links">
             <router-link to="/filmes">Filmes</router-link>
             <router-link to="/series">Séries</router-link>
-            <router-link to="/tv">TV</router-link>
         </div>
     </header>
 </template>
@@ -29,7 +30,7 @@ header {
     z-index: 3;
 }
 
-h1 {
+.title {
     position: absolute;
 }
 

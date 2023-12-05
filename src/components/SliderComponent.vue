@@ -1,25 +1,25 @@
 <script setup>
 
-import { watch, ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useMovieStore } from '@/stores/movieData';
 
 const movieStore = new useMovieStore()
-const backdrops = movieStore.backdrops;
-const movieSlider = ref();
-const currentMovie = ref(0)
+const filmes = movieStore.filmesPopulares;
+const slider = ref();
+const filmeAtual = ref(0)
 
 function changeSlide(index) {
 
-    if (currentMovie.value == 0 && index == -1 || currentMovie.value == backdrops.length - 1) {
-        currentMovie.value = 0
+    if (filmeAtual.value == 0 && index == -1 || filmeAtual.value == filmes.length - 1) {
+        filmeAtual.value = 0
     } else {
-        currentMovie.value += index
+        filmeAtual.value += index
     }
-    movieSlider.value[currentMovie.value].scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        });
+    slider.value[filmeAtual.value].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+    });
 };
 
 </script>
@@ -28,8 +28,8 @@ function changeSlide(index) {
     <div class="container">
         <div class="left navigation" @click="changeSlide(-1)">...</div>
         <div class="slideContainer">
-            <div class="slider" v-for="image, index of backdrops" :key="index" ref="movieSlider">
-                <img :src="`https://image.tmdb.org/t/p/original/${image}`" alt="">
+            <div class="slider" v-for="filme, index of filmes" :key="index" ref="slider">
+                <img :src="`https://image.tmdb.org/t/p/original/${filme.backdrop_path}`" alt="">
             </div>
         </div>
         <div class="right navigation" @click="changeSlide(1)">...</div>
@@ -37,13 +37,13 @@ function changeSlide(index) {
 </template>
 
 <style scoped>
-
 .container {
     display: flex;
     width: 100%;
     color: white;
     margin-top: -10px;
 }
+
 .slider {
     position: relative;
     display: flex;
@@ -78,5 +78,4 @@ img {
     border-radius: 5px;
     box-shadow: 10px 10px 5px black;
 }
-
 </style>

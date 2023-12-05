@@ -2,22 +2,27 @@
 
 import HeaderComponent from '../components/HeaderComponent.vue';
 import SliderComponent from '../components/SliderComponent.vue';
-import MovieRowComponent from '../components/MovieRowComponent.vue';
+import FileiraComponent from '../components/FileiraComponent.vue';
 import { useMovieStore } from '../stores/movieData';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import Loading from 'vue-loading-overlay'
 
 const movieStore = new useMovieStore;
+const isLoading = ref(false)
 
-onMounted(() => {
-    movieStore.getMoviesData();
+onMounted(async () => {
+   isLoading.value = true
+   await movieStore.buscarFilmes();
+   isLoading.value = false
 })
 
 </script>
 
 <template>
         <header-component />
-        <slider-component />
-        <movie-row-component />
+        <slider-component v-if="!isLoading"/>
+        <fileira-component v-if="!isLoading" />
+        <loading v-model:active="isLoading"/>
 </template>
 
 <style scoped>
