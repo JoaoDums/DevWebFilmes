@@ -76,4 +76,8 @@ img {
     width: 250px;
     height: 380px;
 }
+
+.movie {
+    cursor: pointer;
+}
 </style>
