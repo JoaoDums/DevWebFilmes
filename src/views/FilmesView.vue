@@ -4,12 +4,16 @@ import Loading from 'vue-loading-overlay'
 import moviesApi from '../api/movies'
 import useGenreStore from '../stores/genre.js';
 import HeaderComponent from '../components/HeaderComponent.vue';
+import { useMovieStore } from '../stores/movieData';
+import { useRouter } from 'vue-router';
 
 const genreStore = useGenreStore();
+const movieStore = useMovieStore();
 const isLoading = ref(false);
 const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR')
 
 const movies = ref([]);
+const router = useRouter()
 
 const listMovies = async (genreId) => {
     genreStore.setCurrentGenreId(genreId);
@@ -19,6 +23,13 @@ const listMovies = async (genreId) => {
     isLoading.value = false;
 };
 
+function enviarInfo(titulo, sinopse, lancamento, poster) {
+    movieStore.tituloAtual = titulo;
+    movieStore.sinopseAtual = sinopse;
+    movieStore.lancamentoAtual = lancamento;
+    movieStore.posterAtual = poster;
+    router.push('/filme')
+}
 
 onMounted(async () => {
     isLoading.value = true;
@@ -42,7 +53,7 @@ onMounted(async () => {
     </ul>
     <loading v-model:active="isLoading" is-full-page />
     <div class="movie-list">
-        <div v-for="movie in movies" :key="movie.id" class="movie-card">
+        <div v-for="movie in movies" :key="movie.id" class="movie-card" @click="enviarInfo(movie.title, movie.overview, movie.release_date, movie.poster_path)">
 
             <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title" />
             <div class="movie-details">

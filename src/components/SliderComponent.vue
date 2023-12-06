@@ -2,6 +2,8 @@
 
 import { ref, onMounted } from 'vue';
 import { useMovieStore } from '@/stores/movieData';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 const movieStore = new useMovieStore()
 const filmes = movieStore.filmesPopulares;
@@ -22,13 +24,22 @@ function changeSlide(index) {
     });
 };
 
+
+function enviarInfo(titulo, sinopse, lancamento, poster) {
+    movieStore.tituloAtual = titulo;
+    movieStore.sinopseAtual = sinopse;
+    movieStore.lancamentoAtual = lancamento;
+    movieStore.posterAtual = poster;
+    router.push('/filme')
+}
+
 </script>
 
 <template>
     <div class="container">
         <div class="left navigation" @click="changeSlide(-1)">...</div>
         <div class="slideContainer">
-            <div class="slider" v-for="filme, index of filmes" :key="index" ref="slider">
+            <div class="slider" v-for="filme, index of filmes" :key="index" ref="slider" @click="enviarInfo(filme.title, filme.overview, filme.release_date, filme.poster_path)">
                 <img :src="`https://image.tmdb.org/t/p/original/${filme.backdrop_path}`" alt="">
             </div>
         </div>
@@ -48,8 +59,7 @@ function changeSlide(index) {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-left: 10%;
-
+    cursor: pointer;
 }
 
 .slideContainer {

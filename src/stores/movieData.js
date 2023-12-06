@@ -8,6 +8,10 @@ export const useMovieStore = defineStore('movies', {
         seriesPopulares: [],
         seriesMelhorAvalidas: [],
         filmesVariasPaginas: [],
+        tituloAtual: null,
+        lancamentoAtual: null,
+        posterAtual: null,
+        sinopseAtual: null,
     }),
     actions: {
         async buscarFilmes() {
