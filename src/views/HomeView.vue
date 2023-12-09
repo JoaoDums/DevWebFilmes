@@ -27,7 +27,7 @@ onMounted(async () => {
 
 <style scoped>
 h1 {
-        color: white;
+        color: rgb(209, 45, 45);
         text-align: center;
 }
 </style>

@@ -85,16 +85,16 @@ onMounted(async () => {
 
 
 .genre-item {
-    background-color: #000000;
+    background-color: rgb(201, 42, 42);
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: #ffffff;
 }
 
 .genre-item:hover {
     cursor: pointer;
-    background-color: #1d1d1d;
-    box-shadow: 0 0 0.5rem #b8b8b8;
+    background-color: #000000;
+    box-shadow: 0 0 0.9rem #ffffff;
 }
 
 
@@ -102,7 +102,7 @@ onMounted(async () => {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    color: white;
+    color: rgb(255, 255, 255);
     width: 100%;
     justify-content: center;
 }
@@ -112,7 +112,7 @@ onMounted(async () => {
     height: 32rem;
     border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 0 0.5rem #000;
+    box-shadow: 0 0 0.9rem rgb(238, 238, 238);
     cursor: pointer;
 }
 
@@ -120,7 +120,7 @@ onMounted(async () => {
     width: 100%;
     height: 20rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #000;
+    box-shadow: 0 0 0.9rem #ffffff;
 }
 
 .movie-details {
@@ -144,10 +144,10 @@ onMounted(async () => {
 }
 
 .movie-genres span {
-    background-color: #050505;
+    background-color: #e21111;
     border-radius: 0.5rem;
     padding: 0.2rem 0.5rem;
-    color: #fff;
+    color: #ffffff;
     font-size: 0.8rem;
     font-weight: bold;
 }
@@ -155,16 +155,16 @@ onMounted(async () => {
 .movie-genres span:hover {
     cursor: pointer;
     background-color: #000000;
-    box-shadow: 0 0 0.5rem #cccccc;
+    box-shadow: 0 0 0.9rem #ffffff;
 }
 
 .active {
-  background-color: #1f1f1f;
+  background-color: #3f3434;
   font-weight: bolder;
 }
 
 .movie-genres span.active {
-  background-color: #383838;
+  background-color: #3b3232;
   font-weight: bolder;
 }
 
